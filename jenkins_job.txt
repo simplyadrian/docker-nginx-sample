@@ -1,0 +1,6 @@
+eval $(aws --region us-west-2 ecr get-login)
+docker build -t $DOCKER_NAME:$DOCKER_TAG .
+docker tag $DOCKER_NAME:$DOCKER_TAG $ECR_REPO:$DOCKER_TAG
+docker push $ECR_REPO:$DOCKER_TAG
+docker rmi $DOCKER_NAME:$DOCKER_TAG
+docker rmi $ECR_REPO:$DOCKER_TAG
